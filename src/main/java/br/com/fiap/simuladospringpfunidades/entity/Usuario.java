@@ -27,6 +27,13 @@ public class Usuario {
     @Column(name = "PASSW_USUARIO")
     private String password;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey (
+                    name = "FK_USUARIO_PESSOA"
+            )
+    )
     private Pessoa pessoa;
-
 }

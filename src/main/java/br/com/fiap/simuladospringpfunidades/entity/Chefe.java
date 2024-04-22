@@ -26,15 +26,29 @@ public class Chefe {
     @Column(name = "SUBS_CHEFE")
     private Boolean substituto;
 
-    @Column(name = "USUA_CHEFE")
-    private Usuario usuario;
-
-    @Column(name = "UNID_CHEFE")
-    private Unidade unidade;
-
     @Column(name = "INIC_CHEFE")
     private LocalDateTime inicio;
 
     @Column(name = "FIM_CHEFE")
     private LocalDateTime fim;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "USUARIO",
+            referencedColumnName = "ID_USUARIO",
+            foreignKey = @ForeignKey (
+                    name = "FK_CHEFE_USUARIO"
+            )
+    )
+    private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "UNIDADE",
+            referencedColumnName = "ID_UNIDADE",
+            foreignKey = @ForeignKey (
+                    name = "FK_CHEFE_UNIDADE"
+            )
+    )
+    private Unidade unidade;
 }
