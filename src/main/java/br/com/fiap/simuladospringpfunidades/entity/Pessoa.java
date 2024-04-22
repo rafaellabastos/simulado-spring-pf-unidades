@@ -29,7 +29,6 @@ public class Pessoa {
     @Column(name = "SOBR_PESSOA")
     private String sobrenome;
 
-    @Column(name = "EMAIL_PESSOA")
     private String email;
 
     @Column(name = "NASC_PESSOA")
