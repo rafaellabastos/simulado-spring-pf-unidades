@@ -27,5 +27,13 @@ public class Unidade {
     @Column(name = "DESC_UNIDADE")
     private String descricao;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "UNIDADE",
+            referencedColumnName = "ID_UNIDADE",
+            foreignKey = @ForeignKey (
+                    name = "FK_MACRO_UNIDADE"
+            )
+    )
     private Unidade macro;
 }
