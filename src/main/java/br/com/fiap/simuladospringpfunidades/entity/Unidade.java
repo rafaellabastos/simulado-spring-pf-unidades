@@ -27,6 +27,5 @@ public class Unidade {
     @Column(name = "DESC_UNIDADE")
     private String descricao;
 
-    @Column(name = "MAC_UNIDADE")
     private Unidade macro;
 }

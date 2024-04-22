@@ -26,7 +26,7 @@ public class Usuario {
 
     @Column(name = "PASSW_USUARIO")
     private String password;
-    
+
     private Pessoa pessoa;
 
 }
