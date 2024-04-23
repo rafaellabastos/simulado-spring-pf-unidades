@@ -14,9 +14,10 @@ import java.time.LocalDateTime;
 @Builder
 
 @Entity
-@Table(name = "TB_CHEFE")
-public class Chefe {
+@Table(name = "TB_CHEFE", uniqueConstraints = {@UniqueConstraint(name = "UK_CHEFE_USUARIO_UNIDADE_FIM", columnNames = {"ID_USUARIO", "ID_UNIDADE", "FIM"})
+})
 
+public class Chefe {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CHEFE")
     @SequenceGenerator(name = "SQ_CHEFE", sequenceName = "SQ_CHEFE", allocationSize = 1)
@@ -32,23 +33,7 @@ public class Chefe {
     @Column(name = "FIM_CHEFE")
     private LocalDateTime fim;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(
-            name = "USUARIO",
-            referencedColumnName = "ID_USUARIO",
-            foreignKey = @ForeignKey (
-                    name = "FK_CHEFE_USUARIO"
-            )
-    )
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(
-            name = "UNIDADE",
-            referencedColumnName = "ID_UNIDADE",
-            foreignKey = @ForeignKey (
-                    name = "FK_CHEFE_UNIDADE"
-            )
-    )
     private Unidade unidade;
 }

@@ -6,6 +6,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+
+@Entity
+@Table(name = "TB_TIPO")
 public enum Tipo {
 
     PF( 1L, "Pessoa Física", "PF" ), PJ( 2L, "Pessoa Jurídica", "PJ" );

@@ -13,10 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 
-@Entity()
-@Table(name = "TB_PESSOA")
-public class Pessoa {
+@Entity
+@Table(name = "TB_PESSOA", uniqueConstraints = {@UniqueConstraint(name = "UK_EMAIL_PESSOA", columnNames = "EMAIL")})
 
+public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PESSOA")
     @SequenceGenerator(name = "SQ_PESSOA", sequenceName = "SQ_PESSOA", allocationSize = 1)
