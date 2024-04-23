@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 
 @Entity
-@Table(name = "TB_UNIDADE", uniqueConstraints = {@UniqueConstraint(name = "UK_", columnNames = "")})
+@Table(name = "TB_UNIDADE", uniqueConstraints = {@UniqueConstraint(name = "UK_UNIDADE_SIGLA", columnNames = "UNIDADE", "MACRO")})
 
 public class Unidade {
     @Id
@@ -27,5 +27,12 @@ public class Unidade {
     @Column(name = "DESC_UNIDADE")
     private String descricao;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "MACRO",
+            referencedColumnName = "ID_UNIDADE",
+            foreignKey = @ForeignKey(name = "FK_UNIDADE_MACRO"),
+            nullable = false
+    )
     private Unidade macro;
 }

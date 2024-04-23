@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "TB_USUARIO",
-        uniqueConstraints = {@UniqueConstraint(name = "UK_USERNAME", columnNames = "USERNAME"),
-                            @UniqueConstraint(name = "UK_USER_PESSOA", columnNames = "PESSOA")
+        uniqueConstraints = {@UniqueConstraint(name = "UK_USERNAME_USUARIO", columnNames = "USERNAME"),
+                            @UniqueConstraint(name = "UK_PESSOA_PESSOA", columnNames = "PESSOA")
 })
 
 public class Usuario {
@@ -30,5 +30,11 @@ public class Usuario {
     @Column(name = "PASSW_USUARIO")
     private String password;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "PESSOA",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "FK_USUARI_PESSOA")
+    )
     private Pessoa pessoa;
 }

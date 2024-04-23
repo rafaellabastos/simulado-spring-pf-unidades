@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Builder
 
 @Entity
-@Table(name = "TB_CHEFE", uniqueConstraints = {@UniqueConstraint(name = "UK_CHEFE_USUARIO_UNIDADE_FIM", columnNames = {"ID_USUARIO", "ID_UNIDADE", "FIM"})
+@Table(name = "TB_CHEFE",
+        uniqueConstraints = {@UniqueConstraint(name = "UK_CHEFE_UNIDADE", columnNames = {"USUARIO", "UNIDADE", "FIM"})
 })
 
 public class Chefe {
@@ -27,13 +28,30 @@ public class Chefe {
     @Column(name = "SUBS_CHEFE")
     private Boolean substituto;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "USUARIO",
+            referencedColumnName = "ID_USUARIO",
+            foreignKey = @ForeignKey(name = "FK_USUARIO_CHEFE"),
+            nullable = false
+    )
+    private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "UNIDADE",
+            referencedColumnName = "ID_UNIDADE",
+            foreignKey = @ForeignKey(name = "FK_CHEFE_UNIDADE"),
+            nullable = false
+    )
+    private Unidade unidade;
+
     @Column(name = "INIC_CHEFE")
     private LocalDateTime inicio;
 
     @Column(name = "FIM_CHEFE")
     private LocalDateTime fim;
 
-    private Usuario usuario;
 
-    private Unidade unidade;
+
 }
