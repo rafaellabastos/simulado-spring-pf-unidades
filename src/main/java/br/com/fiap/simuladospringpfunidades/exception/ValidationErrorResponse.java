@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Personalizando erros de validação
- */
 @Data
 public class ValidationErrorResponse {
 
@@ -26,7 +23,6 @@ public class ValidationErrorResponse {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    // classe interna para representar um erro de validação
     public static class ValidationError {
         private String field;
         private String message;
